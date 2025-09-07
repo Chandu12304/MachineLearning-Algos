@@ -1,0 +1,57 @@
+import pandas as pd
+
+def candidate_elimination(data, domains):
+    S = ["0"] * (len(data[0]) - 1)
+    G = [["?"] * (len(data[0]) - 1)]
+
+    print("Initial Specific hypothesis S:", S)
+    print("Initial General hypothesis G:", G)
+
+    for row in data:
+        example = row[:-1]
+        label = row[-1].lower()
+
+        if label == "yes":
+            # Update S
+            for j in range(len(S)):
+                if S[j] == "0":
+                    S[j] = example[j]
+                elif S[j] != example[j]:
+                    S[j] = "?"
+
+            # Remove inconsistent G
+            G = [g for g in G if all(g[j] == "?" or g[j] == example[j] for j in range(len(g)))]
+
+        else:  # Negative example
+            new_G = []
+            for g in G:
+                for j in range(len(g)):
+                    if g[j] == "?":
+                        # Specialize using all possible values except the negative one
+                        for val in domains[j]:
+                            if val != example[j]:
+                                new_hypothesis = g.copy()
+                                new_hypothesis[j] = val
+                                if new_hypothesis not in new_G:
+                                    new_G.append(new_hypothesis)
+            G = new_G
+
+        print("\nTraining example:", row)
+        print("Updated Specific hypothesis S:", S)
+        print("Updated General hypothesis G:", G)
+
+    return S, G
+
+
+# Load CSV file
+df = pd.read_csv("train.csv")
+data = df.values.tolist()
+
+# Extract domains of each attribute (all unique values per column, except label)
+domains = [list(df[col].unique()) for col in df.columns[:-1]]
+
+# Run Candidate Elimination
+S_final, G_final = candidate_elimination(data, domains)
+
+print("\nFinal Specific hypothesis:", S_final)
+print("Final General hypothesis:", G_final)
