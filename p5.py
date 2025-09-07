@@ -4,9 +4,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 
-# -------------------------
-# Load sample dataset (or replace with CSV)
-# -------------------------
 data = [
     ['ham', "Hey, are we still on for dinner tonight?"],
     ['spam', "WINNER! You have won a free cruise. Call now!"],
@@ -20,35 +17,20 @@ data = [
     ['spam', "Congratulations! You've been selected for a $1000 Walmart gift card."]
 ]
 
-# If using a CSV, uncomment below:
-# df = pd.read_csv("dataset.csv")  
-
 df = pd.DataFrame(data, columns=["label", "text"])
-df['label'] = df['label'].map({'ham': 0, 'spam': 1})  # 0=ham, 1=spam
+df['label'] = df['label'].map({'ham': 0, 'spam': 1})
 
-# -------------------------
-# Split data into train and test
-# -------------------------
 X_train, X_test, y_train, y_test = train_test_split(
     df['text'], df['label'], test_size=0.3, random_state=42
 )
 
-# -------------------------
-# Convert text to numbers
-# -------------------------
 vectorizer = CountVectorizer(stop_words='english')
 X_train_vec = vectorizer.fit_transform(X_train)
 X_test_vec = vectorizer.transform(X_test)
 
-# -------------------------
-# Train Naive Bayes
-# -------------------------
 model = MultinomialNB()
 model.fit(X_train_vec, y_train)
 
-# -------------------------
-# Evaluate classifier
-# -------------------------
 y_pred = model.predict(X_test_vec)
 
 accuracy = accuracy_score(y_test, y_pred)
@@ -60,9 +42,6 @@ print(f"Accuracy:  {accuracy:.2f}")
 print(f"Precision: {precision:.2f}")
 print(f"Recall:    {recall:.2f}")
 
-# -------------------------
-# Predict new messages
-# -------------------------
 test_messages = [
     "Your loan is approved! Call now to claim.",
     "Hi, just checking in to see how you're doing.",
