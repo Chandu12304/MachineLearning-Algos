@@ -1,9 +1,6 @@
 import numpy as np
 from sklearn.naive_bayes import MultinomialNB
 
-# -------------------------
-# Simple encoding for categories
-# -------------------------
 age = {'SuperSeniorCitizen': 0, 'SeniorCitizen': 1, 'MiddleAged': 2, 'Youth': 3, 'Teen': 4}
 gender = {'Male': 0, 'Female': 1}
 family_history = {'Yes': 0, 'No': 1}
@@ -11,11 +8,6 @@ diet = {'High': 0, 'Medium': 1, 'Low': 2}
 lifestyle = {'Athlete': 0, 'Active': 1, 'Moderate': 2, 'Sedentary': 3}
 cholesterol = {'High': 0, 'BorderLine': 1, 'Normal': 2}
 
-# -------------------------
-# Sample medical dataset
-# Each row: [age, gender, familyHistory, diet, lifestyle, cholesterol]
-# Label: 0 = Heart Disease (Yes), 1 = No Heart Disease
-# -------------------------
 X = np.array([
     [0,1,0,1,3,0], [1,0,0,0,2,0], [2,0,0,0,3,0],
     [1,1,0,1,2,0], [2,1,0,0,2,0], [3,0,1,2,1,1],
@@ -23,15 +15,9 @@ X = np.array([
 ])
 y = np.array([0,0,0,0,0,1,1,1,1,1])
 
-# -------------------------
-# Train Naive Bayes model
-# -------------------------
 model = MultinomialNB()
 model.fit(X, y)
 
-# -------------------------
-# User input and prediction
-# -------------------------
 print("Enter patient medical data as numbers corresponding to the categories:")
 
 try:
