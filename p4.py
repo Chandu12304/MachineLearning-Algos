@@ -24,7 +24,7 @@ b2 = np.zeros((1, output_neurons))
 
 # Training
 lr = 0.5
-for epoch in range(10000):
+for cnt in range(10000):
     # Forward pass
     hidden_input = np.dot(X, W1) + b1
     hidden_output = sigmoid(hidden_input)
