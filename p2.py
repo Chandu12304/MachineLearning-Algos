@@ -20,7 +20,16 @@ def candidate_elimination(data, domains):
                     S[j] = "?"
 
             # Remove inconsistent G
-            G = [g for g in G if all(g[j] == "?" or g[j] == example[j] for j in range(len(g)))]
+            new_G = []
+for g in G:                           # check each hypothesis in G
+    ok = True
+    for j in range(len(g)):           # check each attribute
+        if not (g[j] == "?" or g[j] == example[j]):
+            ok = False                # this hypothesis doesn't cover the example
+            break
+    if ok:
+        new_G.append(g)               # keep it
+G = new_G
 
         else:  # Negative example
             new_G = []
