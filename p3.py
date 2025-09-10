@@ -47,3 +47,15 @@ for col in new_df.columns:
     new_df[col] = le.fit_transform(new_df[col])  # re-encode
 
 print("Prediction:", model.predict(new_df)[0])
+
+Outlook → ['Sunny', 'Rainy', 'Overcast']
+
+Temperature → ['Warm', 'Cold', 'Hot']
+
+Humidity → ['Normal', 'High']
+
+Wind → ['Strong', 'Weak']
+
+Water → ['Warm', 'Cool']
+
+Forecast → ['Same', 'Change']
