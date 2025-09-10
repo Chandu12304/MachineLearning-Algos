@@ -4,6 +4,19 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 
+data = [
+    ['ham', "Hey, are we still on for dinner tonight?"],
+    ['spam', "WINNER! You have won a free cruise. Call now!"],
+    ['ham', "I'll call you back in 10 minutes."],
+    ['spam', "URGENT! Your account has been suspended. Click to verify."],
+    ['ham', "Don't forget about the meeting at 3 PM."],
+    ['spam', "Free entry in 2 a wkly comp to win FA Cup final tkts 21st May"],
+    ['ham', "Lunch tomorrow?"],
+    ['spam', "Claim your free ringtone now by texting WIN to 80085"],
+    ['ham', "Can you send me the report before noon?"],
+    ['spam', "Congratulations! You've been selected for a $1000 Walmart gift card."]
+]
+
 data=pd.read_csv('train.csv')
 
 df=pd.DataFrame(data,columns=["label","text"])
