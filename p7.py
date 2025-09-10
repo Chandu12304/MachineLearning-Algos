@@ -1,22 +1,27 @@
-# Import libraries
 import pandas as pd
 from sklearn.cluster import KMeans
 
-# Step 1: Define the training data directly
-data = pd.DataFrame({
-    'X': [1, 1, 1, 10, 10, 10],
-    'Y': [2, 4, 0, 2, 4, 0]
-})
+# Step 1: Define the training data as a list of lists
+data = [
+    [1, 2],
+    [1, 4],
+    [1, 0],
+    [10, 2],
+    [10, 4],
+    [10, 0]
+]
+
+# Convert to DataFrame
+df = pd.DataFrame(data, columns=["X", "Y"])
 
 print("Data:")
-print(data)
+print(df)
 
-# Step 2: Initialize K-Means
-# We want 2 clusters (k=2)
+# Step 2: Initialize K-Means (2 clusters)
 kmeans = KMeans(n_clusters=2, random_state=0)
 
 # Step 3: Train the model
-kmeans.fit(data)
+kmeans.fit(df)
 
 # Step 4: Get cluster labels
 labels = kmeans.labels_
