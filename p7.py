@@ -18,7 +18,7 @@ print(labels)
 centers=kmeans.cluster_centers_
 print(centers)
 
-plt.scatter(df.X,df.Y,c=labels)
+plt.scatter(df["X"],df["Y"],c=labels)
 plt.scatter(*centers.T,c="red",s=100,marker="X")
 plt.grid()
 plt.show()
